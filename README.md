@@ -39,36 +39,7 @@ through.
 
 ## Architecture
 
-```
-User Prompt
-     │
-     ▼
-┌────────────────────┐
-│  Text Cleaner      │  app/utils.py
-│  (lowercase, norm) │
-└────────┬───────────┘
-         │
-         ▼
-┌────────────────────┐
-│  Keyword Scanner   │  app/classifier.py (Stage 1)
-│  (regex patterns)  │  ~60 patterns across 4 categories
-└────────┬───────────┘
-         │ no match
-         ▼
-┌────────────────────┐
-│  ML Classifier     │  app/classifier.py (Stage 2)
-│  TF-IDF + LogReg   │  90-sample training set, trigrams
-└────────┬───────────┘
-         │ label + confidence
-         ▼
-┌────────────────────┐
-│  Threshold Engine  │  app/threshold.py
-│  (default 0.70)    │
-└────────┬───────────┘
-         │
-    ┌────┴────┐
-  BLOCK     ALLOW
-```
+https://www.figma.com/make/IPjQVG5OsygOuhIv9jgbfY/Architecture-diagram?t=VpOxDSirn2mLapLP-20&fullscreen=1
 
 **Detected categories:** `jailbreak` · `injection` · `toxic` · `harmful` · `safe`
 
@@ -180,10 +151,10 @@ Evaluated on **55 prompts** (40 Unsafe across 4 categories, 15 Safe).
 
 | Metric    | Hybrid Model (Fixed) | Baseline (keyword-only) |
 |-----------|:--------------------:|:-----------------------:|
-| Accuracy  | **100.00%**          | 61.82%                  |
-| Precision | **100.00%**          | 100.00%                 |
-| Recall    | **100.00%**          | 47.50%                  |
-| F1-score  | **100.00%**          | 64.41%                  |
+| Accuracy  | 100.00%          | 61.82%                  |
+| Precision | 100.00%          | 100.00%                 |
+| Recall    | 100.00%          | 47.50%                  |
+| F1-score  | 100.00%          | 64.41%                  |
 
 The fixed hybrid model catches **100% of unsafe prompts** with zero false positives,
 compared to a 52.5% miss rate in the keyword-only baseline.
@@ -197,8 +168,8 @@ compared to a 52.5% miss rate in the keyword-only baseline.
 | Method                 | Keyword regex        | Regex + TF-IDF + LogReg    |
 | Category detection     |  None (safe/unsafe) | 4 categories             |
 | Paraphrase handling    | Brittle            |  Generalises              |
-| False negative rate    | ~52.5%               | **0%**                     |
-| False positive rate    | 0%                   | **0%**                     |
+| False negative rate    | ~52.5%               | 0%                     |
+| False positive rate    | 0%                   | 0%                     |
 | Speed                  | Very fast            | Fast (< 15 ms)             |
 | Requires training      | No                   | No (fits in-memory)        |
 | sklearn compatibility  | —                    |  1.3+ (no deprecated args)|
@@ -209,13 +180,13 @@ compared to a 52.5% miss rate in the keyword-only baseline.
 
 | Bug | Original | Fixed |
 |-----|----------|-------|
-| **False negatives** | 28/40 unsafe prompts slipped through (70% miss rate) | 0/40 miss rate |
-| **Keyword coverage** | ~15 narrow patterns per category | ~15–18 broad patterns per category |
-| **Training set size** | 45 samples | 90 samples |
-| **sklearn deprecation** | `LogisticRegression(multi_class='multinomial')` broke on sklearn 1.3+ | Removed deprecated param |
-| **`run.sh` pytest dep** | Required `pytest` (not always installed) | Uses built-in `python3 -m unittest` |
-| **Missing folders** | `models/`, `data/raw/`, `data/processed/` absent | Created with `.gitkeep` |
-| **`logs.csv` missing** | Not seeded — dashboard showed blank | Pre-seeded with example entries |
+| False negatives** | 28/40 unsafe prompts slipped through (70% miss rate) | 0/40 miss rate |
+| Keyword coverage** | ~15 narrow patterns per category | ~15–18 broad patterns per category |
+| Training set size** | 45 samples | 90 samples |
+| sklearn deprecation** | `LogisticRegression(multi_class='multinomial')` broke on sklearn 1.3+ | Removed deprecated param |
+| `run.sh` pytest dep** | Required `pytest` (not always installed) | Uses built-in `python3 -m unittest` |
+| Missing folders** | `models/`, `data/raw/`, `data/processed/` absent | Created with `.gitkeep` |
+| `logs.csv` missing** | Not seeded — dashboard showed blank | Pre-seeded with example entries |
 
 ---
 
