@@ -41,6 +41,8 @@ through.
 
 https://www.figma.com/make/IPjQVG5OsygOuhIv9jgbfY/Architecture-diagram?t=VpOxDSirn2mLapLP-20&fullscreen=1
 
+![alt text](image.png)
+
 **Detected categories:** `jailbreak` · `injection` · `toxic` · `harmful` · `safe`
 
 ---
