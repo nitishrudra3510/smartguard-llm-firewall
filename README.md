@@ -20,7 +20,7 @@ drastically reduce such risks.
 
 The classification has two stages that will work in sequence:
 
-1. **Keyword Stage - This is a stage that is performed using quick regex rules to search the prompt with known threat.
+1. Keyword Stage - This is a stage that is performed using quick regex rules to search the prompt with known threat.
    indications of every one of the four types of threats. A keyword hit immediately
    offers high confidence (0.95) without passing through the ML model.
 
@@ -43,7 +43,7 @@ https://www.figma.com/make/IPjQVG5OsygOuhIv9jgbfY/Architecture-diagram?t=VpOxDSi
 
 ![alt text](image.png)
 
-**Detected categories:** `jailbreak` · `injection` · `toxic` · `harmful` · `safe`
+Detected categories: `jailbreak` · `injection` · `toxic` · `harmful` · `safe`
 
 ---
 
@@ -182,13 +182,13 @@ compared to a 52.5% miss rate in the keyword-only baseline.
 
 | Bug | Original | Fixed |
 |-----|----------|-------|
-| False negatives** | 28/40 unsafe prompts slipped through (70% miss rate) | 0/40 miss rate |
-| Keyword coverage** | ~15 narrow patterns per category | ~15–18 broad patterns per category |
-| Training set size** | 45 samples | 90 samples |
-| sklearn deprecation** | `LogisticRegression(multi_class='multinomial')` broke on sklearn 1.3+ | Removed deprecated param |
-| `run.sh` pytest dep** | Required `pytest` (not always installed) | Uses built-in `python3 -m unittest` |
-| Missing folders** | `models/`, `data/raw/`, `data/processed/` absent | Created with `.gitkeep` |
-| `logs.csv` missing** | Not seeded — dashboard showed blank | Pre-seeded with example entries |
+| False negatives | 28/40 unsafe prompts slipped through (70% miss rate) | 0/40 miss rate |
+| Keyword coverage | ~15 narrow patterns per category | ~15–18 broad patterns per category |
+| Training set size | 45 samples | 90 samples |
+| sklearn deprecation | `LogisticRegression(multi_class='multinomial')` broke on sklearn 1.3+ | Removed deprecated param |
+| `run.sh` pytest dep | Required `pytest` (not always installed) | Uses built-in `python3 -m unittest` |
+| Missing folders | `models/`, `data/raw/`, `data/processed/` absent | Created with `.gitkeep` |
+| `logs.csv` missing | Not seeded — dashboard showed blank | Pre-seeded with example entries |
 
 ---
 
