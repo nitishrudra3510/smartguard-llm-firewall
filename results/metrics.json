@@ -1,0 +1,14 @@
+{
+  "hybrid": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "baseline": {
+    "accuracy": 0.6182,
+    "precision": 1.0,
+    "recall": 0.475,
+    "f1": 0.6441
+  }
+}
