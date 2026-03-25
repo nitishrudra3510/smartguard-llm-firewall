@@ -20,14 +20,14 @@ from evaluation.baseline  import baseline_classify
 from evaluation.metrics   import compute_binary_metrics, compute_threshold_sweep, full_report
 
 
-# ─── Load test suite ─────────────────────────────────────────────────────────
+#  Load test suite
 
 def load_test_suite(path: str) -> list:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-# ─── Run classifiers ─────────────────────────────────────────────────────────
+#  Run classifiers 
 
 def run_evaluation():
     print("\n🔍  Loading test suite …")
@@ -59,7 +59,7 @@ def run_evaluation():
             "confidence": b["confidence"],
         })
 
-    # ─── Compute metrics ─────────────────────────────────────────────────────
+    #  Compute metrics 
 
     def to_binary(results):
         y_true = [1 if r["true_label"] == "Unsafe" else 0 for r in results]
@@ -87,7 +87,7 @@ def run_evaluation():
         print(f"  {k:<12}: {v:.4f}")
     print()
 
-    # ─── Save metrics.json ───────────────────────────────────────────────────
+    #  Save metrics.json 
 
     os.makedirs(os.path.dirname(METRICS_PATH), exist_ok=True)
     with open(METRICS_PATH, "w", encoding="utf-8") as f:
@@ -97,7 +97,7 @@ def run_evaluation():
         )
     print(f"💾  Metrics saved → {METRICS_PATH}")
 
-    # ─── Save per-prompt CSV ─────────────────────────────────────────────────
+    #  Save per-prompt CSV 
 
     csv_path = "results/eval_results.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
@@ -118,7 +118,7 @@ def run_evaluation():
             })
     print(f"💾  Per-prompt results → {csv_path}")
 
-    # ─── Plot accuracy vs threshold ───────────────────────────────────────────
+    #  Plot accuracy vs threshold 
 
     sweep = compute_threshold_sweep(hybrid_results)
     thresholds = [s[0] for s in sweep]
