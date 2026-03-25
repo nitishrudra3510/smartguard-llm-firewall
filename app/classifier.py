@@ -1,8 +1,6 @@
 # classifier.py — Hybrid prompt classifier (FIXED v1.1)
 #
-# Strategy: two-stage pipeline
-#   Stage 1 – Expanded keyword scan covering broad threat vocabulary
-#   Stage 2 – TF-IDF + Logistic Regression with 90-sample training corpus
+
 #
 # Bug fixed: original had 28/40 unsafe prompts slip through due to
 # insufficient keyword coverage and a small training set.
@@ -207,7 +205,6 @@ _TRAIN_DATA = [
 _IDX_TO_CAT = {0: "safe", 1: "jailbreak", 2: "injection", 3: "toxic", 4: "harmful"}
 _CAT_TO_IDX = {v: k for k, v in _IDX_TO_CAT.items()}
 
-# ─── Model singleton ─────────────────────────────────────────────────────────
 
 _pipeline: Pipeline | None = None
 
@@ -235,7 +232,7 @@ def _get_model() -> Pipeline:
     return _pipeline
 
 
-# ─── Keyword stage ───────────────────────────────────────────────────────────
+
 
 def _keyword_scan(text: str) -> tuple[str | None, float]:
     """
@@ -249,7 +246,7 @@ def _keyword_scan(text: str) -> tuple[str | None, float]:
     return None, 0.0
 
 
-# ─── Public API ──────────────────────────────────────────────────────────────
+
 
 def classify(prompt: str) -> dict:
     """

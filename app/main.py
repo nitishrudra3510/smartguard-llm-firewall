@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# main.py — Entry point for the LLM Guardrails Firewall
+# main.py — entry point for the LLM Guardrails Firewall
 #
 # Usage:
 #   python -m app.main                  # interactive mode

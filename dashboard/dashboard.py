@@ -15,7 +15,7 @@ from app.threshold   import apply_threshold
 from app.utils       import log_result
 from app.config      import THRESHOLD, LOGS_PATH, METRICS_PATH
 
-# ─── Page config ─────────────────────────────────────────────────────────────
+#  Page config 
 
 st.set_page_config(
     page_title="LLM Guardrails Firewall",
@@ -23,9 +23,9 @@ st.set_page_config(
     layout="centered",
 )
 
-# ─── Sidebar ─────────────────────────────────────────────────────────────────
+# Sidebar 
 
-st.sidebar.title("⚙️ Settings")
+st.sidebar.title(" Settings")
 threshold = st.sidebar.slider(
     "Confidence Threshold",
     min_value=0.0, max_value=1.0, value=THRESHOLD, step=0.05,
@@ -34,10 +34,10 @@ threshold = st.sidebar.slider(
 st.sidebar.markdown("---")
 st.sidebar.markdown(
     "**Categories detected:**\n"
-    "- 🔓 Jailbreak\n- 💉 Injection\n- ☠️ Toxic\n- ⚠️ Harmful\n- ✅ Safe"
+    "-  Jailbreak\n-  Injection\n-  Toxic\n- Harmful\n- Safe"
 )
 
-# ─── Main header ─────────────────────────────────────────────────────────────
+#  Main header 
 
 st.title("🛡️ LLM Guardrails Firewall")
 st.markdown(
@@ -46,7 +46,7 @@ st.markdown(
 )
 st.markdown("---")
 
-# ─── Prompt input ────────────────────────────────────────────────────────────
+#  Prompt input 
 
 prompt = st.text_area(
     "Enter a prompt to analyse:",
@@ -64,42 +64,42 @@ if st.button("🔍 Analyse Prompt", use_container_width=True):
             log_result(prompt, result["label"], result["category"],
                        result["confidence"], decision)
 
-        # ─── Result card ─────────────────────────────────────────────────────
+        #  Result card 
         col1, col2 = st.columns(2)
 
-        label_colour = "🟢" if result["label"] == "Safe" else "🔴"
+        label_colour = "" if result["label"] == "Safe" else ""
         col1.metric("Label", f"{label_colour} {result['label']}")
         col1.metric("Category", result["category"].capitalize())
 
         col2.metric("Confidence", f"{result['confidence']:.1%}")
-        decision_colour = "✅" if decision == "ALLOW" else "🚫"
+        decision_colour = "" if decision == "ALLOW" else ""
         col2.metric("Decision", f"{decision_colour} {decision}")
 
-        # ─── Confidence bar ───────────────────────────────────────────────────
+        #  Confidence bar 
         st.markdown("#### Confidence")
         st.progress(result["confidence"])
 
-        # ─── Explanation ──────────────────────────────────────────────────────
+        #  Explanation 
         if decision == "BLOCK":
             st.error(
-                f"🚫 **Blocked** — This prompt was classified as **{result['category']}** "
+                f" **Blocked** — This prompt was classified as **{result['category']}** "
                 f"with {result['confidence']:.1%} confidence, which exceeds the "
                 f"{threshold:.0%} threshold."
             )
         else:
             if result["label"] == "Unsafe":
                 st.warning(
-                    f"⚠️ **Allowed (low confidence)** — Potentially {result['category']} "
+                    f" **Allowed (low confidence)** — Potentially {result['category']} "
                     f"but confidence ({result['confidence']:.1%}) is below the threshold."
                 )
             else:
                 st.success(
-                    f"✅ **Allowed** — Prompt appears safe ({result['confidence']:.1%} confidence)."
+                    f" **Allowed** — Prompt appears safe ({result['confidence']:.1%} confidence)."
                 )
 
 st.markdown("---")
 
-# ─── Recent logs ─────────────────────────────────────────────────────────────
+#  Recent logs 
 
 st.subheader("📋 Recent Activity Log")
 
@@ -110,7 +110,7 @@ if os.path.isfile(LOGS_PATH):
 else:
     st.info("No activity yet. Analyse a prompt above to get started.")
 
-# ─── Metrics panel ───────────────────────────────────────────────────────────
+#  Metrics panel 
 
 st.subheader("📊 Evaluation Metrics")
 
