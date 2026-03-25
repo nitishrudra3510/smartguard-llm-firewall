@@ -2,7 +2,7 @@
 #
 
 #
-# Bug fixed: original had 28/40 unsafe prompts slip through due to
+# bug fixed: original had 28/40 unsafe prompts slip through due to
 # insufficient keyword coverage and a small training set.
 
 import re
@@ -14,7 +14,7 @@ from sklearn.pipeline import Pipeline
 from app.config import LABEL_SAFE, LABEL_UNSAFE
 from app.utils import clean_text
 
-# ─── Keyword patterns per category (EXPANDED) ────────────────────────────────
+#  Keyword patterns per category (EXPANDED) 
 
 KEYWORD_PATTERNS = {
     "jailbreak": [

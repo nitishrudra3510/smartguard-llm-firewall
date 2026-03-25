@@ -1,7 +1,5 @@
-# baseline.py — Keyword-only baseline classifier
-#
-# This is intentionally simpler than the hybrid model in classifier.py.
-# It exists so we can measure how much the ML stage actually helps.
+# baseline.py — keyword-only baseline classifier
+
 
 import re
 
