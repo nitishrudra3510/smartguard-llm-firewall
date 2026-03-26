@@ -4,7 +4,7 @@ The safety layer, which is locally-executable and lightweight, and that is in fr
 filtering of the incoming prompts as either safe or unsafe and then sent to the
 model. No paid APIs. No GPU required. Less than one minute to boot on any laptop.
 
----
+
 
 ## Problem Statement
 
@@ -14,7 +14,7 @@ in immediate injection, or remove poisonous substance. A dedicated pre-processin
 The ability to intercept and categorize prompts before they reach the LLM is possible in a layer.
 drastically reduce such risks.
 
----
+
 
 ## Approach
 
@@ -35,7 +35,7 @@ The ultimate is specified by an adjustable level of confidence (0.70 default).
 decision: any decision exceeding the threshold is blocked, and less than it is permitted.
 through.
 
----
+
 
 ## Architecture
 
@@ -45,7 +45,7 @@ https://www.figma.com/make/IPjQVG5OsygOuhIv9jgbfY/Architecture-diagram?t=VpOxDSi
 
 Detected categories: `jailbreak` · `injection` · `toxic` · `harmful` · `safe`
 
----
+
 
 ## Project Structure
 
@@ -83,7 +83,7 @@ llm-guardrails-firewall/
 └── README.md
 ```
 
----
+
 
 ## How to Run
 
@@ -145,7 +145,7 @@ Open [http://localhost:8501](http://localhost:8501) in your browser.
 bash run.sh
 ```
 
----
+
 
 ## Results
 
@@ -161,7 +161,7 @@ Evaluated on **55 prompts** (40 Unsafe across 4 categories, 15 Safe).
 The fixed hybrid model catches **100% of unsafe prompts** with zero false positives,
 compared to a 52.5% miss rate in the keyword-only baseline.
 
----
+
 
 ## Comparison: Baseline vs Hybrid Model
 
@@ -190,18 +190,18 @@ compared to a 52.5% miss rate in the keyword-only baseline.
 | Missing folders | `models/`, `data/raw/`, `data/processed/` absent | Created with `.gitkeep` |
 | `logs.csv` missing | Not seeded — dashboard showed blank | Pre-seeded with example entries |
 
----
+
 
 ## Failure Cases
 
 Some of the possible prompts that just pass in a real world adversarial system:
 
-- **Multi-turn roleplay, which is explained turn-by-turn.
-- **Code-as-vector attacks - Unscrupulous code, which is embedded in base64 or code remarks.
+- Multi-turn roleplay, which is explained turn-by-turn.
+- Code-as-vector attacks - Unscrupulous code, which is embedded in base64 or code remarks.
 - Language injection multi-lingual - Language switches between the sentence.
 - Suggestive toxicity/subliminal bigotry/understated negativism/subliminal negativism/subliminal rhetoric -Not saying that we are hostile, but simply saying it underhandedly.
 
----
+
 
 ## Future Improvements
 
@@ -212,8 +212,5 @@ Some of the possible prompts that just pass in a real world adversarial system:
 - Support as real middleware such as an LLM proxy (e.g. LiteLLM).
 - Active loop: low-confidence to human forward prediction.
 
----
 
-## License
 
-MIT

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# evaluate.py — Run the hybrid classifier AND baseline on test_suite.json,
-#               compute metrics, save results, and plot accuracy vs threshold.
+
 
 import json
 import os
