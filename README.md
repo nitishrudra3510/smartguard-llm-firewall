@@ -149,7 +149,7 @@ bash run.sh
 
 ## Results
 
-Evaluated on **55 prompts** (40 Unsafe across 4 categories, 15 Safe).
+Evaluated on 55 prompts** (40 Unsafe across 4 categories, 15 Safe).
 
 | Metric    | Hybrid Model (Fixed) | Baseline (keyword-only) |
 |-----------|:--------------------:|:-----------------------:|
@@ -158,7 +158,7 @@ Evaluated on **55 prompts** (40 Unsafe across 4 categories, 15 Safe).
 | Recall    | 100.00%          | 47.50%                  |
 | F1-score  | 100.00%          | 64.41%                  |
 
-The fixed hybrid model catches **100% of unsafe prompts** with zero false positives,
+The fixed hybrid model catches 100% of unsafe prompts** with zero false positives,
 compared to a 52.5% miss rate in the keyword-only baseline.
 
 
